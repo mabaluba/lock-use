@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Service.Models;
 
-namespace Service
+namespace Service.Configuration
 {
     public class BankingContext : DbContext
     {

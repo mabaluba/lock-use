@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Service.Configuration;
+using Service.Configuration.Repositories;
 
 namespace Service
 {
@@ -31,6 +26,9 @@ namespace Service
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Service", Version = "v1"}); });
             services.AddDbContext<BankingContext>(builder =>
                 builder.UseNpgsql(Configuration.GetConnectionString("Connection")));
+
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddAutoMapper(typeof(AutomapperProfiles));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

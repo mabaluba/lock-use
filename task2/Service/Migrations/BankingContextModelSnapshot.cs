@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Service;
+using Service.Configuration;
+using Service.Models;
 
 namespace Service.Migrations
 {
@@ -21,7 +22,7 @@ namespace Service.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("Service.Account", b =>
+            modelBuilder.Entity("Service.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,39 +45,9 @@ namespace Service.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("accounts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Balance = 25000m,
-                            Currency = "GBP",
-                            Name = "Main Fund"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Balance = 1000m,
-                            Currency = "GBP",
-                            Name = "For investment"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Balance = 150m,
-                            Currency = "CAN",
-                            Name = "For Canada market"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Balance = 50m,
-                            Currency = "USD",
-                            Name = "For USA market"
-                        });
                 });
 
-            modelBuilder.Entity("Service.Transaction", b =>
+            modelBuilder.Entity("Service.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,168 +82,6 @@ namespace Service.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountId = 4,
-                            Amount = 500m,
-                            Currency = "USD",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Completed,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountId = 4,
-                            Amount = 16.49m,
-                            Currency = "USD",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.FX
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountId = 4,
-                            Amount = 0.05m,
-                            Currency = "USD",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.Fee
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccountId = 3,
-                            Amount = 0.25m,
-                            Currency = "CAN",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.Fee
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccountId = 3,
-                            Amount = 20.0m,
-                            Currency = "CAN",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.FX
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccountId = 3,
-                            Amount = 1000.0m,
-                            Currency = "USD",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Declined,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AccountId = 1,
-                            Amount = 50.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AccountId = 1,
-                            Amount = 12.52m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Declined,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AccountId = 1,
-                            Amount = 0.15m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Declined,
-                            Type = TransactionType.Fee
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AccountId = 1,
-                            Amount = 12000.81m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AccountId = 2,
-                            Amount = 20.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Declined,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AccountId = 2,
-                            Amount = 100.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Declined,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 13,
-                            AccountId = 2,
-                            Amount = 5.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Completed,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AccountId = 2,
-                            Amount = 5.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Income,
-                            Status = TransactionStatus.Completed,
-                            Type = TransactionType.Transfer
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AccountId = 2,
-                            Amount = 200.0m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Completed,
-                            Type = TransactionType.Fee
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AccountId = 2,
-                            Amount = 0.25m,
-                            Currency = "GBP",
-                            Direction = TransactionDirection.Outcome,
-                            Status = TransactionStatus.Pending,
-                            Type = TransactionType.Fee
-                        });
                 });
 #pragma warning restore 612, 618
         }

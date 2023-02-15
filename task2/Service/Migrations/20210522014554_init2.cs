@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Service;
+using Service.Models;
 
 namespace Service.Migrations
 {
